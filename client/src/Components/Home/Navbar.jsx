@@ -1,10 +1,7 @@
 // src/components/Navbar.jsx
 import React from "react";
 import { NavLink } from "react-router-dom"; // <-- Updated import
-
 import "../../Styles/Home/Navbar.css";
-
-
 import logo from "../../assets/logo2.jpeg";
 
 const Navbar = () => {
@@ -13,7 +10,6 @@ const Navbar = () => {
       {/* Logo + Name */}
       <div className="navbar-logo">
         <img src={logo} alt="Adalah Logo" className="logo-img" />
-
         <div className="logo-text">
           {/* <h2 className="main-title">ADALAH</h2> */}
           <h2 className="main-title">
@@ -63,9 +59,7 @@ const Navbar = () => {
             Chatbot
           </NavLink>
         </li>
-
       </ul>
-
       {/* Login / Signup */}
       <div className="navbar-auth">
         <NavLink to="/login">
