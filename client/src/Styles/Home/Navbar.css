@@ -1,0 +1,116 @@
+/* NAVBAR MAIN CONTAINER */
+.navbar {
+  width: 96%;
+  height: 80px;
+  background: #0B1E39;         /* Navy Blue */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* LEFT SIDE (LOGO + TEXT) */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 28px; /* adjust as per your navbar */
+  font-weight: 700;
+  color: #ffffff; /* default text color */
+  font-family: 'Arial', sans-serif; /* ya aapka font */
+}
+.logo .gold-letter {
+  color: #c9a449; /* gold */
+}
+
+.logo-img {
+  /* width: 50px;
+  height: 50px;
+  object-fit: contain; */
+  width: 60px;          /* apni requirement ke hisaab se size adjust karo */
+  height: 60px;         /* same as width for perfect circle */
+  border-radius: 50%;   /* circle banane ke liye */
+  object-fit: cover;    /* image proper fit ho, stretch na ho */
+  display: block;
+}
+
+.main-title {
+  font-size: 28px; /* adjust as per your design */
+  font-weight: 700;
+  color: #ffffff; /* default color */
+  font-family: 'Arial', sans-serif;
+}
+
+.main-title .gold-letter {
+  color: #c9a449; /* gold */
+}
+
+.logo-text .main-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.logo-text .sub-title {
+  color: #E8ECF2;
+  font-size: 12px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* CENTER LINKS */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 35px;
+}
+
+.navbar-links li a {
+  color: #E8ECF2;       /* Light grey text */
+  font-size: 16px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: #F7C75C;       /* Gold on hover */
+}
+
+/* RIGHT BUTTON */
+.navbar-auth .login-btn {
+  background: #F7C75C;  /* Gold */
+  color: #0B1E39;       /* Navy */
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar-auth .login-btn:hover {
+  background: #ffdda1;
+}
+
+.active-link {
+  color: #F7C75C !important;   /* Gold color */
+  border-bottom: 2px solid #F7C75C;
+  padding-bottom: 3px;
+}
+
+/* mobile responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+}

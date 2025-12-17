@@ -1,0 +1,92 @@
+/* Services.css */
+/* Section styling */
+.services {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #081d38; /* Dark navy background */
+  color: #ffffff;
+}
+
+.services h2 {
+  font-size: 2.8rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+  color: #f0c040; /* Gold accent for heading */
+}
+
+/* Container for all cards */
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  justify-items: center;
+  padding: 0 20px; /* Horizontal spacing */
+  box-sizing: border-box;
+  align-items: stretch;
+}
+
+/* Individual card */
+.service-card {
+    background: rgba(255, 255, 255, 0.12);
+
+  /* slightly lighter than section bg */
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 80%;
+  max-width: 280px;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 5px 5px 5px 5px rgba(240, 192, 64, 0.4);
+
+}
+
+/* Icon */
+.service-icon {
+  background-color: #f0c040; /* gold background */
+  color: #0a1f44; /* dark icon color */
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  font-size: 1.5rem;
+}
+
+/* Card title */
+.service-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Card description */
+.service-description {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .services h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .service-card {
+    max-width: 100%;
+    padding: 25px 15px;
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
