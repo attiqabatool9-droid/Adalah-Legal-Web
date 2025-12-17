@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"; // <-- Updated import
 import "../../Styles/Home/Navbar.css";
 
 
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo2.jpeg";
 
 const Navbar = () => {
   return (

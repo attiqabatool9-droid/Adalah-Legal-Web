@@ -1,6 +1,6 @@
 /* NAVBAR MAIN CONTAINER */
 .navbar {
-  width: 96%;
+  width: 100%;
   height: 80px;
   background: #0B1E39;         /* Navy Blue */
   display: flex;

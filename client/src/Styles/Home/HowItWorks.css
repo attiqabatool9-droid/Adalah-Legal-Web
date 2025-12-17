@@ -6,7 +6,7 @@
 /* Section Wrapper */
 .how-it-works {
   padding: 70px 0;
-  background-color: #081d38; /* Navy */
+  background-color: #0B1E39; /* Navy */
   color: #ffffff;
   text-align: center;
 }
@@ -31,10 +31,10 @@
 
 /* Individual Step Card */
 .step-card {
-  background: #0d2752; /* Dark navy card */
+  background: #0e254b; /* Dark navy card */
   padding: 20px 20px; /* Less height, compact */
   border-radius: 14px;
-  width: 90%;
+  width: 100%;
   max-width: 320px;    /* WIDER */
   min-height: 220px;   /* SHORTER */
   display: flex;
@@ -48,7 +48,7 @@
 
 .step-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0.5,0.9,4,0.45);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
 }
 
 /* Icon Circle */

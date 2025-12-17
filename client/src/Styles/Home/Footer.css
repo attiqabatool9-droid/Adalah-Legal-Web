@@ -1,10 +1,11 @@
 /* ===== FOOTER ===== */
 .footer {
-  background-color: #081d38;
+  background-color: #0B1E39;
   color: #ffffff;
   padding: 60px 20px 20px 20px;
   font-family: Arial, sans-serif;
 }
+
 /* Container for all footer content */
 .footer-container {
   display: flex;

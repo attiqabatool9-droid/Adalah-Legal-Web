@@ -1,9 +1,10 @@
 /* Services.css */
+
 /* Section styling */
 .services {
   padding: 60px 0;
   text-align: center;
-  background-color: #081d38; /* Dark navy background */
+  background-color: #0B1E39; /* Dark navy background */
   color: #ffffff;
 }
 
@@ -27,9 +28,7 @@
 
 /* Individual card */
 .service-card {
-    background: rgba(255, 255, 255, 0.12);
-
-  /* slightly lighter than section bg */
+  background-color: #0e254b; /* slightly lighter than section bg */
   padding: 30px 20px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -40,8 +39,7 @@
 
 .service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 5px 5px 5px 5px rgba(240, 192, 64, 0.4);
-
+  box-shadow: 0 12px 25px rgba(0,0,0,0.5);
 }
 
 /* Icon */

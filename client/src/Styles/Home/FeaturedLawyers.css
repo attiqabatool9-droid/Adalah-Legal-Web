@@ -1,8 +1,8 @@
 /* ==== SECTION WRAPPER ==== */
 .featured-lawyers {
   width: 100%;
-  padding: 80px 10px;
-  background: #081d38; /* deep navy blue */
+  padding: 80px 0;
+  background: #0B1E39; /* deep navy blue */
   text-align: center;
   color: #ffffff;
 }
@@ -10,7 +10,7 @@
 .featured-lawyers h2 {
   font-size: 34px;
   font-weight: 700;
-  color: #c9a449;
+  color: #ffffff;
   margin-bottom: 45px;
   letter-spacing: 1px;
 }
@@ -32,12 +32,12 @@
   margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  gap: 50px;
 } 
 
 /* ==== LAWYER CARD ==== */
 .lawyer-card {
-  background: #0d2752; /* lighter navy */
+  background: #0e254b; /* lighter navy */
   border-radius: 16px;
   padding: 28px 22px;
   text-align: center;
