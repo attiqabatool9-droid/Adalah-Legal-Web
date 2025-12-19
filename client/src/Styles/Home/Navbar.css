@@ -108,9 +108,36 @@
   padding-bottom: 3px;
 }
 
+.join-dropdown {
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  background: #0b1c2d;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  padding: 10px 0;
+  width: 180px;
+  z-index: 999;
+}
+
+.join-option {
+  display: block;
+  padding: 10px 15px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.join-option:hover {
+  background: #c9a24d;
+  color: #000;
+}
+
+
 /* mobile responsive */
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
   }
 }
+
