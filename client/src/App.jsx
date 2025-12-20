@@ -16,9 +16,9 @@ import SuggestedLawyers from "./Pages/User/SuggestedLawyers";
 import Request from "./Pages/User/Request";
 import UserProfile from "./Pages/User/UserProfile";
 import Logout from "./Pages/User/Logout";
-import Join from "./Pages/User/Join/Join.jsx";
-
-
+import Join from "./Pages/User/Join/Join";
+import UserJoinForm from "./Pages/User/Join/UserJoinForm";
+import LawyerJoinForm from "./Pages/User/Join/LawyerJoinForm";
 
 import './App.css';
 
@@ -42,6 +42,8 @@ function App() {
         <Route path="/user/logout" element={<Logout />} />
 
         <Route path="/join" element={<Join />} />
+        <Route path="/join-user" element={<UserJoinForm />} />
+        <Route path="/join-lawyer" element={<LawyerJoinForm />} />
 
 
 

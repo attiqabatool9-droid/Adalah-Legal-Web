@@ -3,7 +3,9 @@ import UserJoinForm from "./UserJoinForm";
 import LawyerJoinForm from "./LawyerJoinForm";
 
 function Join() {
-  const [role, setRole] = useState(""); // user | lawyer
+  console.log("JOIN PAGE RENDERED");
+
+  const [role, setRole] = useState("");
 
   return (
     <div style={{ padding: "100px", textAlign: "center" }}>
@@ -11,13 +13,19 @@ function Join() {
         <>
           <h2>Join As</h2>
 
-          <button onClick={() => setRole("user")}>
+          <button
+            type="button"
+            onClick={() => setRole("user")}
+          >
             Join as User
           </button>
 
           <br /><br />
 
-          <button onClick={() => setRole("lawyer")}>
+          <button
+            type="button"
+            onClick={() => setRole("lawyer")}
+          >
             Join as Lawyer
           </button>
         </>

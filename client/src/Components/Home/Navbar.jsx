@@ -61,17 +61,15 @@ const Navbar = () => {
           Join
         </button>
 
-        {showJoinOptions && (
-          <div className="join-dropdown">
-            <NavLink to="/join-user" className="join-option">
-              Join as User
-            </NavLink>
+        <div className={`join-dropdown ${showJoinOptions ? 'show' : ''}`}>
+          <NavLink to="/join-user" className="join-option">
+            Join as User
+          </NavLink>
 
-            <NavLink to="/join-lawyer" className="join-option">
-              Join as Lawyer
-            </NavLink>
-          </div>
-        )}
+          <NavLink to="/join-lawyer" className="join-option">
+            Join as Lawyer
+          </NavLink>
+        </div>
       </div>
     </nav>
   );

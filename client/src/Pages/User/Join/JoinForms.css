@@ -1,0 +1,80 @@
+.join-container {
+  max-width: 430px;
+  margin: 80px auto;
+  padding: 35px;
+  background: linear-gradient(145deg, #0b1d36, #132f57);
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Heading */
+.join-container h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #f5c451;
+  letter-spacing: 1px;
+}
+
+/* Inputs & textarea */
+.join-container input,
+.join-container textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #2a4b7c;
+  background: #0f2647;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+.join-container input::placeholder,
+.join-container textarea::placeholder {
+  color: #b8c7e0;
+}
+
+.join-container input:focus,
+.join-container textarea:focus {
+  border-color: #f5c451;
+  box-shadow: 0 0 0 2px rgba(245, 196, 81, 0.25);
+}
+
+/* Textarea */
+.join-container textarea {
+  resize: none;
+  height: 110px;
+}
+
+/* Button */
+.join-container button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #f5c451, #e0a832);
+  color: #0b1d36;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.join-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(245, 196, 81, 0.35);
+}
+
+/* Error message */
+.error {
+  background: rgba(255, 77, 77, 0.15);
+  color: #ffb3b3;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}

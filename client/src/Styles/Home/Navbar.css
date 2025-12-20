@@ -118,6 +118,11 @@
   padding: 10px 0;
   width: 180px;
   z-index: 999;
+  display: none;
+}
+
+.join-dropdown.show {
+  display: block;
 }
 
 .join-option {
