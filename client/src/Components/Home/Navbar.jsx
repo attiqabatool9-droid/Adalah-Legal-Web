@@ -34,7 +34,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to="/find-lawyer" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink to="/user/find-lawyers" className={({ isActive }) => (isActive ? "active-link" : "")}>
             Find Lawyer
           </NavLink>
         </li>
@@ -46,7 +46,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to="/chatbot" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink to="/chat" className={({ isActive }) => (isActive ? "active-link" : "")}>
             Chatbot
           </NavLink>
         </li>

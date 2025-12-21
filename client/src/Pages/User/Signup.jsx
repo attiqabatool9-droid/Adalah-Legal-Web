@@ -1,72 +1,108 @@
-import React from "react";
-import { Link } from "react-router-dom";
-//import "../Styles/Signup.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import "./JoinForms.css";
+import "../../Styles/User/JoinForms.css";
 
-const Signup = () => {
+
+const UserSignup = () => {
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      !form.name ||
+      !form.email ||
+      !form.phone ||
+      !form.password ||
+      !form.confirmPassword
+    ) {
+      setError("All fields are required");
+      return;
+    }
+
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setError("");
+
+    console.log("Signup Data:", form);
+
+    // ✅ TEMP: signup success
+    alert("Signup successful!");
+
+    // 👉 Dashboard open hoga
+    navigate("/user/dashboard");
+  };
+
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        
-        <h2 className="auth-title">Create Your Account</h2>
-        <p className="auth-subtitle">
-          Join Adalah Legal App to connect with verified lawyers,
-          submit your legal issues, and receive professional assistance.
-        </p>
+    <div className="join-container">
+      <h2>User Sign Up</h2>
 
-        <form className="auth-form">
-          <div className="form-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
+      {error && <div className="error">{error}</div>}
 
-          <div className="form-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          value={form.name}
+          onChange={handleChange}
+        />
 
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              required
-            />
-          </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={form.email}
+          onChange={handleChange}
+        />
 
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              placeholder="Confirm your password"
-              required
-            />
-          </div>
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone Number"
+          value={form.phone}
+          onChange={handleChange}
+        />
 
-          <button type="submit" className="auth-btn">
-            Sign Up
-          </button>
-        </form>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+        />
 
-        <div className="auth-footer">
-          <p>
-            Already have an account?{" "}
-            <Link to="/Login" className="auth-link">
-              Login
-            </Link>
-          </p>
-        </div>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={form.confirmPassword}
+          onChange={handleChange}
+        />
 
-      </div>
+        <button type="submit">Create Account</button>
+      </form>
     </div>
   );
 };
 
-export default Signup;
+export default UserSignup;
+

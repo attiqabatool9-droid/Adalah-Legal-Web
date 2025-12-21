@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "../../Styles/User/UserProfile.css";
+import "../../Styles/User/UserProfile.css";
 
 const UserProfile = () => {
   // 🔹 Dummy user data (baad me backend se aayega)

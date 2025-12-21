@@ -1,0 +1,162 @@
+/* ============================================================
+   SUGGESTED LAWYERS PAGE - Professional Navy & Gold Theme
+   ============================================================ */
+
+.suggested-lawyers-page {
+  padding: 20px;
+  background: linear-gradient(135deg, #0B1E39 0%, #1a3f5f 100%);
+  min-height: 100vh;
+  color: #E8ECF2;
+}
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f0c040;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #b4bcc7;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SUGGESTED LAWYERS LIST */
+.suggested-lawyers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* LAWYER CARD */
+.lawyer-card {
+  background: linear-gradient(135deg, rgba(14, 37, 75, 0.8) 0%, rgba(22, 42, 69, 0.8) 100%);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.lawyer-card:hover {
+  transform: translateY(-4px);
+  border-color: #f0c040;
+  box-shadow: 0 12px 32px rgba(240, 192, 64, 0.2);
+}
+
+.lawyer-card h3 {
+  color: #f0c040;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.lawyer-card p {
+  color: #b4bcc7;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lawyer-card strong {
+  color: #E8ECF2;
+}
+
+/* SUGGESTION REASON */
+.suggestion-reason {
+  background: rgba(240, 192, 64, 0.1);
+  padding: 12px;
+  border-left: 3px solid #f0c040;
+  margin: 16px 0;
+  border-radius: 4px;
+  color: #e0d89f !important;
+  font-size: 0.9rem;
+}
+
+.suggestion-reason strong {
+  color: #f0c040;
+}
+
+/* REQUEST BUTTON */
+.request-btn {
+  width: 100%;
+  padding: 12px 24px;
+  margin-top: auto;
+  background: #f0c040;
+  color: #0B1E39;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.request-btn:hover {
+  background: #f7d86f;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.4);
+}
+
+.request-btn:active {
+  transform: scale(0.98);
+}
+
+/* EMPTY STATE */
+.suggested-lawyers-list > p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: #7a869e;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .suggested-lawyers-list {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .suggested-lawyers-page {
+    padding: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .lawyer-card {
+    padding: 16px;
+  }
+
+  .lawyer-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .suggestion-reason {
+    font-size: 0.85rem;
+  }
+}

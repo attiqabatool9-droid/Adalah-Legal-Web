@@ -1,0 +1,215 @@
+/* ============================================================
+   MY CASE REQUESTS PAGE - Professional Navy & Gold Theme
+   ============================================================ */
+
+.request-consultation-page {
+  padding: 20px;
+  background: linear-gradient(135deg, #0B1E39 0%, #1a3f5f 100%);
+  min-height: 100vh;
+  color: #E8ECF2;
+}
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f0c040;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #b4bcc7;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* CASE REQUESTS LIST */
+.case-requests-list {
+  margin-bottom: 40px;
+}
+
+/* CASE REQUESTS TABLE */
+.case-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(14, 37, 75, 0.8);
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.case-requests-table thead {
+  background: linear-gradient(90deg, rgba(11, 30, 57, 0.9) 0%, rgba(22, 42, 69, 0.9) 100%);
+  border-bottom: 2px solid #f0c040;
+}
+
+.case-requests-table th {
+  padding: 16px;
+  text-align: left;
+  color: #f0c040;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.case-requests-table tbody tr {
+  border-bottom: 1px solid rgba(240, 192, 64, 0.1);
+  transition: all 0.3s ease;
+}
+
+.case-requests-table tbody tr:hover {
+  background: rgba(240, 192, 64, 0.08);
+}
+
+.case-requests-table td {
+  padding: 16px;
+  color: #b4bcc7;
+  font-size: 0.95rem;
+}
+
+.case-requests-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* STATUS BADGES */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.status-accepted {
+  background: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-completed {
+  background: rgba(33, 150, 243, 0.15);
+  color: #2196f3;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+/* TABLE BUTTONS */
+.view-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.view-btn {
+  background: #f0c040;
+  color: #0B1E39;
+}
+
+.view-btn:hover {
+  background: #f7d86f;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.4);
+}
+
+.cancel-btn {
+  background: transparent;
+  color: #f0c040;
+  border: 1px solid #f0c040;
+}
+
+.cancel-btn:hover {
+  background: rgba(240, 192, 64, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.2);
+}
+
+/* EMPTY STATE */
+.case-requests-list > p {
+  text-align: center;
+  padding: 60px 20px;
+  color: #7a869e;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .case-requests-table {
+    font-size: 0.85rem;
+  }
+
+  .case-requests-table th,
+  .case-requests-table td {
+    padding: 12px 8px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .view-btn,
+  .cancel-btn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .request-consultation-page {
+    padding: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .case-requests-table {
+    font-size: 0.8rem;
+  }
+
+  .case-requests-table th,
+  .case-requests-table td {
+    padding: 10px 6px;
+  }
+
+  .case-requests-table th {
+    font-size: 0.75rem;
+  }
+
+  .view-btn,
+  .cancel-btn {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+}

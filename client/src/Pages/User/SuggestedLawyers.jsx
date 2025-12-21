@@ -1,5 +1,5 @@
 import React from "react";
-// import "../../Styles/User/SuggestedLawyers.css";
+import "../../Styles/User/SuggestedLawyers.css";
 
 const SuggestedLawyers = () => {
   // 🔹 Dummy suggested lawyers (recommendation system demo)

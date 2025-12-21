@@ -1,0 +1,201 @@
+/* ============================================================
+   FIND LAWYERS PAGE - Professional Navy & Gold Theme
+   ============================================================ */
+
+.search-lawyers-page {
+  padding: 20px;
+  background: linear-gradient(135deg, #0B1E39 0%, #1a3f5f 100%);
+  min-height: 100vh;
+  color: #E8ECF2;
+}
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f0c040;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #b4bcc7;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SEARCH & FILTER SECTION */
+.search-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: rgba(14, 37, 75, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.search-filters input,
+.search-filters select {
+  padding: 12px 16px;
+  border: 1px solid rgba(240, 192, 64, 0.3);
+  border-radius: 8px;
+  background: rgba(11, 30, 57, 0.8);
+  color: #E8ECF2;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.search-filters input::placeholder {
+  color: #7a869e;
+}
+
+.search-filters input:focus,
+.search-filters select:focus {
+  outline: none;
+  border-color: #f0c040;
+  background: rgba(11, 30, 57, 0.95);
+  box-shadow: 0 0 12px rgba(240, 192, 64, 0.3);
+}
+
+.search-filters select {
+  cursor: pointer;
+}
+
+.search-filters select option {
+  background: #0B1E39;
+  color: #E8ECF2;
+}
+
+/* LAWYER RESULTS SECTION */
+.lawyer-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* LAWYER CARD */
+.lawyer-card {
+  background: linear-gradient(135deg, rgba(14, 37, 75, 0.8) 0%, rgba(22, 42, 69, 0.8) 100%);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.lawyer-card:hover {
+  transform: translateY(-4px);
+  border-color: #f0c040;
+  box-shadow: 0 12px 32px rgba(240, 192, 64, 0.2);
+}
+
+.lawyer-card h3 {
+  color: #f0c040;
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.lawyer-card p {
+  color: #b4bcc7;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lawyer-card strong {
+  color: #E8ECF2;
+}
+
+/* BUTTONS */
+.view-profile-btn,
+.request-btn {
+  width: 100%;
+  padding: 12px 24px;
+  margin-top: 16px;
+  background: #f0c040;
+  color: #0B1E39;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-profile-btn:hover,
+.request-btn:hover {
+  background: #f7d86f;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.4);
+}
+
+.view-profile-btn:active,
+.request-btn:active {
+  transform: scale(0.98);
+}
+
+/* EMPTY STATE */
+.lawyer-results > p,
+.suggested-lawyers-list > p,
+.case-requests-list > p {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px;
+  color: #7a869e;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .search-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .lawyer-results {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-lawyers-page {
+    padding: 12px;
+  }
+
+  .search-filters {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .lawyer-card {
+    padding: 16px;
+  }
+
+  .lawyer-card h3 {
+    font-size: 1.1rem;
+  }
+}

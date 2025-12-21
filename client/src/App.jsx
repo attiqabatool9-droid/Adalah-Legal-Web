@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
 import Navbar from "./Components/Home/Navbar";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 // Pages
 import Home from "./Pages/Home/Home";               
@@ -32,20 +33,18 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/user/dashboard" element={<Dashboard />} />
+        <Route path="/user/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
 
         {/* DashboardCard routes */}
-        <Route path="/user/find-lawyers" element={<FindLawyers />} />
-        <Route path="/user/suggested-lawyers" element={<SuggestedLawyers />} />
-        <Route path="/user/requests" element={<Request />} />
-        <Route path="/user/profile" element={<UserProfile />} />
+        <Route path="/user/find-lawyers" element={<ProtectedRoute element={<FindLawyers />} />} />
+        <Route path="/user/suggested-lawyers" element={<ProtectedRoute element={<SuggestedLawyers />} />} />
+        <Route path="/user/requests" element={<ProtectedRoute element={<Request />} />} />
+        <Route path="/user/profile" element={<ProtectedRoute element={<UserProfile />} />} />
         <Route path="/user/logout" element={<Logout />} />
 
         <Route path="/join" element={<Join />} />
         <Route path="/join-user" element={<UserJoinForm />} />
         <Route path="/join-lawyer" element={<LawyerJoinForm />} />
-
-
 
       </Routes>
     </Router>

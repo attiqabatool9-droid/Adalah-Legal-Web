@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-// import "../../Styles/User/Sidebar.css"; // CSS import
+import "../../Styles/User/Sidebar-Enhanced.css";
+
 
 const Sidebar = () => {
   return (
@@ -42,7 +43,7 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink 
-              to="/user/chat" 
+              to="/chat" 
               className={({ isActive }) => isActive ? "active-link" : ""}
             >
               💬 Chat

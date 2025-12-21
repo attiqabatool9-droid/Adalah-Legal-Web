@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./JoinForms.css";
+// import "./JoinForms.css";
+import "../../../Styles/User/JoinForms.css";
 
 function LawyerJoinForm() {
   const [form, setForm] = useState({

@@ -1,67 +1,70 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../Styles/User/Login.css";
-
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ Example simple check (fake login)
-    if (email && password) {
-      // login success → navigate to dashboard
-      navigate("/User/Dashboard"); // ← yahan Dashboard route ka path sahi ho
-    } else {
-      alert("Please enter email and password");
+    if (!form.email || !form.password) {
+      setError("Please enter email and password");
+      return;
     }
+
+    setError("");
+
+    console.log("Login Data:", form);
+
+    // Store authentication data in localStorage
+    localStorage.setItem("authToken", "user_token_" + Date.now());
+    localStorage.setItem("userEmail", form.email);
+    localStorage.setItem("userName", form.email.split("@")[0]);
+    localStorage.setItem("isLoggedIn", "true");
+
+    alert("Login successful");
+
+    // ✅ Dashboard open
+    navigate("/user/dashboard");
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h2>Welcome Back to Adalah Legal App</h2>
-        <p>Login to access your dashboard, search lawyers, and manage your legal requests.</p>
+    <div className="login-container">
+      <h2>User Login</h2>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email Address</label>
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required 
-            />
-          </div>
+      {error && <div className="error">{error}</div>}
 
-          <div className="form-group">
-            <label>Password</label>
-            <input 
-              type="password" 
-              placeholder="Enter your password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required 
-            />
-          </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+        />
 
-          <button type="submit" className="auth-btn">Login</button>
-        </form>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+        />
 
-        <div className="auth-footer">
-          <p>
-            Don’t have an account? <Link to="/signup" className="auth-link">Create Account</Link>
-          </p>
-
-          <p className="auth-forgot">
-            <span>Forgot your password?</span>
-          </p>
-        </div>
-      </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 };

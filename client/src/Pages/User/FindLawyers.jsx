@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-// import "../../Styles/User/SearchLawyers.css";
+import "../../Styles/User/FindLawyers.css";
+
 const FindLawyers = () => {
   // 🔹 Dummy lawyers data (backend ke baghair)
   const lawyersData = [

@@ -1,0 +1,222 @@
+/* Sidebar Container */
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: #0B1E39;
+  color: #ffffff;
+  padding: 30px 20px;
+  position: sticky;
+  top: 0;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Sidebar Title */
+.sidebar-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #f0c040;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  color: #E8ECF2;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(240, 192, 64, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(240, 192, 64, 0.1);
+  color: #f0c040;
+  transform: translateX(5px);
+}
+
+.sidebar-nav a:hover::before {
+  left: 100%;
+}
+
+/* Active Link Styling */
+.active-link {
+  background: #f0c040;
+  color: #0B1E39;
+  box-shadow: 0 8px 15px rgba(240, 192, 64, 0.3);
+  font-weight: 700;
+}
+
+.active-link:hover {
+  background: #f7d86f;
+  box-shadow: 0 12px 20px rgba(240, 192, 64, 0.4);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(240, 192, 64, 0.2);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px 16px;
+  background: #f0c040;
+  color: #0B1E39;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.logout-btn:hover {
+  background: #f7d86f;
+  box-shadow: 0 8px 15px rgba(240, 192, 64, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+    margin-bottom: 0;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .sidebar-nav a {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .sidebar-footer {
+    display: none;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+  .sidebar {
+    flex-direction: column;
+    padding: 12px 16px;
+    align-items: flex-start;
+  }
+
+  .sidebar-title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .sidebar-nav ul {
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .sidebar-nav a {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .sidebar-footer {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .logout-btn {
+    font-size: 0.85rem;
+    padding: 10px 12px;
+  }
+}
+
+/* Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
