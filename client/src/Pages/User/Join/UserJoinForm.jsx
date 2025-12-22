@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../../Styles/User/JoinForms.css";
 
-function UserJoinForm() {
+function UserJoinForm({ setRole }) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -18,6 +18,7 @@ function UserJoinForm() {
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,20 +51,32 @@ function UserJoinForm() {
     }
 
     setError("");
+    setSuccess("Account created successfully! Redirecting...");
 
     console.log("User Join Data:", form);
 
-    alert("Signup successful! Redirecting to dashboard...");
-
-    // ✅ Dashboard open
-    navigate("/user/dashboard");
+    setTimeout(() => {
+      // ✅ Dashboard open
+      navigate("/user/dashboard");
+    }, 1500);
   };
 
   return (
-    <div className="join-container">
-      <h2>Join as User</h2>
+    <div className="join-form-wrapper">
+      <button 
+        className="back-button"
+        onClick={() => setRole("")}
+        title="Go back"
+      >
+        ← Back
+      </button>
+      
+      <div className="join-container">
+        <h2>Join as User</h2>
+        <p className="form-subtitle">Create your account and find the right lawyer for your case</p>
 
-      {error && <div className="error">{error}</div>}
+        {error && <div className="error"><span>⚠️</span> {error}</div>}
+        {success && <div className="success"><span>✓</span> {success}</div>}
 
       <form onSubmit={handleSubmit}>
         <input
@@ -145,18 +158,18 @@ function UserJoinForm() {
           Urgent case
         </label>
 
-        <button type="submit">Create Account</button>
+        <button type="submit" className="submit-button">Create Account</button>
         <p className="form-footer">
-  Already have an account?{" "}
-  <span
-    className="link-text"
-    onClick={() => navigate("/login")}
-  >
-    Login
-  </span>
-</p>
-
+          Already have an account?{" "}
+          <span
+            className="link-text"
+            onClick={() => navigate("/login")}
+          >
+            Login here
+          </span>
+        </p>
       </form>
+      </div>
     </div>
   );
 }

@@ -79,6 +79,8 @@
   font-size: 16px;
   text-decoration: none;
   transition: 0.3s ease;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
 }
 
 .navbar-links li a:hover {
@@ -104,8 +106,9 @@
 
 .active-link {
   color: #F7C75C !important;   /* Gold color */
-  border-bottom: 2px solid #F7C75C;
-  padding-bottom: 3px;
+  border-bottom: 2px solid #F7C75C !important;
+  background: transparent !important;
+  padding-bottom: 3px !important;
 }
 
 .join-dropdown {
