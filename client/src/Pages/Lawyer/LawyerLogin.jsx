@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../Styles/User/Login.css";
+import "../../Styles/User/Login.css"; 
 
-const Login = () => {
+const LawyerLogin = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -26,23 +26,23 @@ const Login = () => {
 
     setError("");
 
-    console.log("Login Data:", form);
+    console.log("Lawyer Login Data:", form);
 
-    // Store authentication data in localStorage
-    localStorage.setItem("authToken", "user_token_" + Date.now());
-    localStorage.setItem("userEmail", form.email);
-    localStorage.setItem("userName", form.email.split("@")[0]);
+    // ✅ Store lawyer auth data
+    localStorage.setItem("authToken", "lawyer_token_" + Date.now());
+    localStorage.setItem("lawyerEmail", form.email);
+    localStorage.setItem("lawyerName", form.email.split("@")[0]);
+    localStorage.setItem("lawyerLoggedIn", "true");
+    localStorage.setItem("role", "lawyer");
     localStorage.setItem("isLoggedIn", "true");
 
-    alert("Login successful");
-
-    // ✅ Dashboard open
-    navigate("/user/dashboard");
+    alert("Lawyer login successful");
+    navigate("/lawyer/dashboard");
   };
 
   return (
     <div className="login-container">
-      <h2>User Login</h2>
+      <h2>Lawyer Login</h2>
 
       {error && <div className="error">{error}</div>}
 
@@ -50,7 +50,7 @@ const Login = () => {
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="Lawyer Email"
           value={form.email}
           onChange={handleChange}
         />
@@ -63,10 +63,12 @@ const Login = () => {
           onChange={handleChange}
         />
 
-        <button type="submit" class="button">Login</button>
+        <button type="submit" className="button">
+          Login as Lawyer
+        </button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default LawyerLogin;

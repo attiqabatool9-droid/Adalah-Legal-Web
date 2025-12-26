@@ -21,6 +21,20 @@ import Join from "./Pages/User/Join/Join";
 import UserJoinForm from "./Pages/User/Join/UserJoinForm";
 import LawyerJoinForm from "./Pages/User/Join/LawyerJoinForm";
 
+
+
+
+import LawyerLogin from "./Pages/Lawyer/LawyerLogin";
+import LawyerDashboard from "./Pages/Lawyer/LawyerDashboard";
+import LawyerProfilePage from "./Pages/Lawyer/LawyerProfilePage";
+import LawyerCaseRequestsPage from "./Pages/Lawyer/LawyerCaseRequestsPage";
+import LawyerAssignedCasesPage from "./Pages/Lawyer/LawyerAssignedCasesPage";
+import LawyerChatPage from "./Pages/Lawyer/LawyerChatPage";
+import LawyerAvailabilityPage from "./Pages/Lawyer/LawyerAvailabilityPage";
+import LawyerCaseDetailsPage from "./Pages/Lawyer/LawyerCaseDetailsPage";
+import LawyerAppointmentsPage from "./Pages/Lawyer/LawyerAppointmentsPage";
+
+
 import './App.css';
 
 function App() {
@@ -45,10 +59,21 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/join-user" element={<UserJoinForm />} />
         <Route path="/join-lawyer" element={<LawyerJoinForm />} />
-
+         
+  
+        <Route path="/lawyer/login" element={<LawyerLogin />} />
+        <Route path="/lawyer/dashboard" element={<LawyerDashboard />} />
+        <Route path="/lawyer/profile" element={<LawyerProfilePage />} />
+        <Route path="/lawyer/requests" element={<LawyerCaseRequestsPage />} />
+        <Route path="/lawyer/assigned-cases" element={<LawyerAssignedCasesPage />} />
+        <Route path="/lawyer/chat" element={<LawyerChatPage />} />
+        <Route path="/lawyer/availability" element={<LawyerAvailabilityPage />} />
+        <Route path="/lawyer/case/:id" element={<LawyerCaseDetailsPage />}
+/>
+        <Route path="/lawyer/appointments" element={<LawyerAppointmentsPage />}/>
       </Routes>
     </Router>
   );
 }
 
-export default App; 
+export default App;

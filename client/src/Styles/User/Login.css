@@ -1,7 +1,8 @@
 /* ===== Login Page Styling ===== */
 
 .login-container {
-  max-width: 420px;
+  margin-top: 50px;
+  max-width: 500px;
   margin: 80px auto;
   padding: 30px 25px;
   background: #ffffff;
@@ -14,8 +15,9 @@
 /* Heading */
 .login-container h2 {
   margin-bottom: 25px;
-  color: #1f2937;
-  font-size: 26px;
+  color: #0B1E39;
+  font-weight: bold;
+  font-size: 30px;
   font-weight: 600;
 }
 
@@ -47,6 +49,16 @@
 }
 
 .login-container input:focus {
-  border-color: #2563eb;
+  border-color: #0B1E39;
   box-shadow: 0
+}
+
+.button{
+  background-color: #0B1E39;
+  color: white;
+  font-size: 20px;
+}
+.button:hover
+{
+  border: #ffffff;
 }

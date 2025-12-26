@@ -1,0 +1,36 @@
+.lawyer-case-requests-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0;
+}
+.section-card {
+  background: #16243a;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  padding: 32px 40px;
+  min-width: 350px;
+  color: #f5f5f5;
+}
+.section-description {
+  color: #b0b8c1;
+  margin-bottom: 18px;
+}
+.case-request-table {
+  margin-top: 18px;
+}
+.case-request-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+.case-request-table th, .case-request-table td {
+  border: 1px solid #23304d;
+  padding: 8px 12px;
+  text-align: left;
+  color: #f5f5f5;
+}
+.case-request-table th {
+  background: #23304d;
+  color: #f5c451;
+}

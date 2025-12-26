@@ -1,0 +1,137 @@
+/* Chat.css */
+
+/* 🔹 Overall Page */
+.chat-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 700px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color:white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  font-family: Arial, sans-serif;
+  margin-top: 30px;
+}
+
+/* 🔹 Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0B1E39;
+  color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.chat-header p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.chat-header .status {
+  font-size: 0.89rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* 🔹 Messages Area */
+.chat-messages {
+  flex: 1;
+  padding: 15px 20px;
+  overflow-y: auto;
+  background-color: #f0f2f5;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  position: relative;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+}
+
+/* User message */
+.user-msg {
+  background-color: #0B1E39;
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 0;
+}
+
+/* Lawyer message */
+.lawyer-msg {
+  background-color: #e0e0e0;
+  color: #333;
+  margin-right: auto;
+  border-bottom-left-radius: 0;
+}
+
+/* Time */
+.chat-message .time {
+  display: block;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 3px;
+  text-align: right;
+}
+
+/* 🔹 Input Area */
+.chat-input {
+  display: flex;
+  padding: 10px 15px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.chat-input input:focus {
+  border-color: #0B1E39;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #0B1E39;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chat-input button:hover {
+  background-color: #5a6ea0;
+}
+
+/* 🔹 Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}

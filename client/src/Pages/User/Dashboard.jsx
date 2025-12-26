@@ -269,6 +269,24 @@ const Dashboard = () => {
           <p>© 2025 Adalah Legal App. Last updated: Just now</p>
           <p>Need help? <a href="#help">Contact Support</a> | <a href="#settings">View Settings</a></p>
         </div>
+
+        {/* Appointment Details Modal */}
+{selectedAppointment && (
+  <div className="appointment-modal">
+    <div className="modal-content">
+      <h3>{selectedAppointment.title}</h3>
+      <p><b>Date:</b> {selectedAppointment.date}</p>
+      <p><b>Time:</b> {selectedAppointment.time}</p>
+      <p><b>Lawyer:</b> {selectedAppointment.lawyer}</p>
+      <p><b>Location:</b> {selectedAppointment.location}</p>
+
+      <button onClick={() => setSelectedAppointment(null)}>
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );

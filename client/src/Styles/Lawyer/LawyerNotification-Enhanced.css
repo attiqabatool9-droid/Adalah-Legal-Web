@@ -1,0 +1,219 @@
+/* Lawyer Notifications Container */
+.lawyer-notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #0e254b;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
+  border: 1px solid #1a3f5f;
+}
+
+/* Notifications Header */
+.lawyer-notifications h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  color: #f0c040;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #1a3f5f;
+  padding-bottom: 15px;
+}
+
+/* Notifications List */
+.lawyer-notifications ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Notification Item */
+.lawyer-notifications li {
+  background: #162a45;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid #1a3f5f;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.lawyer-notifications li:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.2);
+  border-color: #f0c040;
+}
+
+/* Icon Wrapper */
+.notification-icon-wrapper {
+  flex-shrink: 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(240, 192, 64, 0.2);
+  transition: all 0.3s ease;
+}
+
+.lawyer-notifications li:hover .notification-icon-wrapper {
+  transform: scale(1.05);
+}
+
+/* Notification Content Wrapper */
+.notification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 4px;
+}
+
+/* Notification Message */
+.lawyer-notifications span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #E8ECF2;
+  line-height: 1.5;
+  margin: 0;
+  display: block;
+}
+
+/* Notification Date/Time */
+.lawyer-notifications small {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  display: block;
+}
+
+/* Mark as Read Button */
+.lawyer-notifications button {
+  background: #f0c040;
+  color: #0B1E39;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(240, 192, 64, 0.2);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.lawyer-notifications button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(240, 192, 64, 0.4);
+  background: #f7d86f;
+}
+
+.lawyer-notifications button:active {
+  transform: translateY(0);
+}
+
+/* Empty State */
+.lawyer-notifications p {
+  color: #E8ECF2;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 40px 20px;
+  margin: 0;
+  background: #162a45;
+  border-radius: 8px;
+  border: 1px solid #1a3f5f;
+}
+
+/* Priority Indicator (if applicable) */
+.priority-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+  background: #f0c040;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .lawyer-notifications {
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .lawyer-notifications h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .lawyer-notifications li {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .notification-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .lawyer-notifications span {
+    font-size: 0.9rem;
+  }
+
+  .lawyer-notifications button {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lawyer-notifications {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .lawyer-notifications h3 {
+    font-size: 1rem;
+  }
+
+  .lawyer-notifications li {
+    padding: 12px;
+    flex-direction: column;
+  }
+
+  .notification-icon-wrapper {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .lawyer-notifications span {
+    font-size: 0.85rem;
+  }
+
+  .lawyer-notifications small {
+    font-size: 0.75rem;
+  }
+
+  .lawyer-notifications button {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+}
