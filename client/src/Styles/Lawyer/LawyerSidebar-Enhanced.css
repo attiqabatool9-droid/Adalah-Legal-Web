@@ -433,6 +433,9 @@
   .logout-btn {
     width: 100%;
     margin-left: 0;
+  }
+}
+
 .lawyer-sidebar::-webkit-scrollbar {
   width: 6px;
 }

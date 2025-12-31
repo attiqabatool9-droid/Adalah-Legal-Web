@@ -34,6 +34,19 @@ body, #root {
   }
 }
 
+.lawfirm-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.lawfirm-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 250px; /* sidebar width ke barabar */
+}
+
+
 
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,0 +1,262 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  color: #E8ECF2;
+  margin-top: 25px;
+}
+
+/* ===== CASE REQUESTS PAGE WRAPPER ===== */
+.case-requests-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #0B1E39;
+  gap: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* ===== PAGE CONTAINER ===== */
+.case-requests-container {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 150vh;
+  min-width: 0;
+}
+
+/* ===== PAGE HEADER ===== */
+.case-requests-header {
+  margin-bottom: 30px;
+}
+
+.case-requests-header h2 {
+  font-size: 2rem;
+  color: #f0c040;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.case-requests-header p {
+  color: #E8ECF2;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+/* ===== CASE REQUESTS SECTION ===== */
+.case-requests-section {
+  background: #0e254b;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid #1a3f5f;
+}
+
+/* ===== TABLE STYLES ===== */
+.case-requests-table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #1a3f5f;
+}
+
+.case-requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.case-requests-table thead {
+  background: #162a45;
+}
+
+.case-requests-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+  color: #f0c040;
+  border-bottom: 2px solid #1a3f5f;
+}
+
+.case-requests-table tbody tr {
+  border-bottom: 1px solid #1a3f5f;
+  transition: all 0.3s ease;
+}
+
+.case-requests-table tbody tr:hover {
+  background: #1a3f5f;
+}
+
+.case-requests-table td {
+  padding: 15px;
+  color: #E8ECF2;
+}
+
+.case-id {
+  font-weight: 600;
+  color: #f0c040;
+  font-family: 'Courier New', monospace;
+}
+
+.case-title {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.case-description {
+  color: #E8ECF2;
+  font-size: 0.9rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.case-documents {
+  color: #E8ECF2;
+  font-size: 0.9rem;
+}
+
+.case-date {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.case-action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.case-action-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-accept {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid #10b981;
+}
+
+.btn-accept:hover {
+  background: rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-reject {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.btn-reject:hover {
+  background: rgba(231, 76, 60, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .case-requests-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .case-requests-wrapper {
+    flex-direction: column;
+  }
+
+  .case-requests-container {
+    padding: 15px;
+    max-height: none;
+  }
+
+  .case-requests-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .case-requests-section {
+    padding: 15px;
+  }
+
+  .case-requests-table th,
+  .case-requests-table td {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .case-action-button {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .case-description {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .case-requests-container {
+    padding: 10px;
+  }
+
+  .case-requests-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .case-requests-section {
+    padding: 15px;
+  }
+
+  .case-requests-table {
+    font-size: 0.8rem;
+  }
+
+  .case-requests-table th,
+  .case-requests-table td {
+    padding: 8px;
+  }
+
+  .case-action-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .case-action-buttons {
+    flex-direction: column;
+    gap: 5px;
+  }
+}

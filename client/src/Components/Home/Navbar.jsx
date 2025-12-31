@@ -69,6 +69,9 @@ const Navbar = () => {
           <NavLink to="/join-lawyer" className="join-option">
             Join as Lawyer
           </NavLink>
+          <NavLink to="/join-law-firm" className="join-option">
+            Join as LawFirm
+          </NavLink>
         </div>
       </div>
     </nav>
