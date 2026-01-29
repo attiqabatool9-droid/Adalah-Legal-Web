@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../Styles/Lawyer/LawyerDashboard-Enhanced.css";
 import LawyerSidebar from "../../Components/Lawyer/LawyerSidebar";
+import API from "../../api";
 
 const LawyerProfilePage = () => {
-  // Example profile data
-  const [profile, setProfile] = useState({
-    name: localStorage.getItem("lawyerName") || "Lawyer Name",
-    email: localStorage.getItem("lawyerEmail") || "lawyer@email.com",
-    specialization: "Family Law",
-    experience: "5 years",
-    city: "Karachi",
-    cnic: "12345-6789012-3",
-    phone: "+92-300-1234567",
-    bio: "Experienced lawyer specializing in family law and civil disputes.",
-  });
-
+  const [profile, setProfile] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editForm, setEditForm] = useState(profile);
+  const [editForm, setEditForm] = useState({});
   const [isSaving, setIsSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Fetch profile on component mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        const response = await API.get("/api/users/me");
+        setProfile(response.data);
+        setEditForm(response.data);
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+        setError("Failed to load profile. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProfile();
+  }, []);
 
   // Calculate profile completeness
   const calculateCompleteness = () => {
+    if (!profile) return 0;
     const fields = [
       profile.name,
       profile.email,
@@ -29,9 +41,8 @@ const LawyerProfilePage = () => {
       profile.city,
       profile.cnic,
       profile.phone,
-      profile.bio,
     ];
-    const filledFields = fields.filter(field => field && field.trim().length > 0).length;
+    const filledFields = fields.filter(field => field && field.toString().trim().length > 0).length;
     return Math.round((filledFields / fields.length) * 100);
   };
 
@@ -42,27 +53,72 @@ const LawyerProfilePage = () => {
     setEditForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = () => {
-    setIsSaving(true);
-    // Simulate API call
-    setTimeout(() => {
-      setProfile(editForm);
-      localStorage.setItem("lawyerName", editForm.name);
-      localStorage.setItem("lawyerEmail", editForm.email);
+  const handleSave = async () => {
+    try {
+      setIsSaving(true);
+      setError("");
+      
+      // Prepare data to send (exclude _id and timestamps)
+      const updateData = {
+        name: editForm.name,
+        email: editForm.email,
+        phone: editForm.phone,
+        specialization: editForm.specialization,
+        experience: editForm.experience,
+        cnic: editForm.cnic,
+        city: editForm.city,
+      };
+
+      const response = await API.put("/api/users/me", updateData);
+      setProfile(response.data);
+      setEditForm(response.data);
       setIsEditing(false);
+      alert("✅ Profile updated successfully!");
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      setError("Failed to update profile. Please try again.");
+      alert("❌ Error updating profile: " + (err.response?.data?.message || err.message));
+    } finally {
       setIsSaving(false);
-    }, 500);
+    }
   };
 
   const handleCancel = () => {
     setEditForm(profile);
     setIsEditing(false);
+    setError("");
   };
 
   const handleEdit = () => {
     setEditForm(profile);
     setIsEditing(true);
   };
+
+  if (loading) {
+    return (
+      <div className="lawyer-dashboard-wrapper">
+        <LawyerSidebar />
+        <div className="lawyer-dashboard-main">
+          <div className="section-card">
+            <p>Loading profile...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="lawyer-dashboard-wrapper">
+        <LawyerSidebar />
+        <div className="lawyer-dashboard-main">
+          <div className="section-card">
+            <p>Failed to load profile.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="lawyer-dashboard-wrapper">

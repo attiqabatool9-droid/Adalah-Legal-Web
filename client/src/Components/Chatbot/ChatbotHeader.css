@@ -1,0 +1,41 @@
+/* Chatbot Header */
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f4c81; /* Dark blue */
+  color: #fff;
+  padding: 10px 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.chatbot-header-title {
+  display: flex;
+  align-items: center;
+}
+
+.chatbot-title-icon {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+.chatbot-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.chatbot-close-btn {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chatbot-close-btn:hover {
+  transform: rotate(90deg);
+}

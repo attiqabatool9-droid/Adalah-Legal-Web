@@ -1,12 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "../../Styles/Lawyer/LawyerDashboard-Enhanced.css";
 import LawyerSidebar from "../../Components/Lawyer/LawyerSidebar";
+import API from "../../api";
 
-const CaseRequestTable = ({ requests, searchTerm, filterStatus }) => {
+const CaseRequestTable = ({ requests, searchTerm, filterStatus, onAccept, onReject, loading }) => {
   const filteredRequests = useMemo(() => {
     return requests.filter((r) => {
       const matchesSearch =
-        r.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (r.client?.name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
         r.caseType.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesFilter = filterStatus === "All" || r.status === filterStatus;
       return matchesSearch && matchesFilter;
@@ -15,17 +16,27 @@ const CaseRequestTable = ({ requests, searchTerm, filterStatus }) => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Pending":
+      case "pending":
         return "#FFC107";
-      case "Accepted":
+      case "active":
         return "#4CAF50";
-      case "Completed":
+      case "completed":
         return "#2196F3";
-      case "Rejected":
+      case "rejected":
         return "#F44336";
       default:
         return "#999";
     }
+  };
+
+  const getStatusLabel = (status) => {
+    const labels = {
+      pending: "Pending",
+      active: "Accepted",
+      completed: "Completed",
+      rejected: "Rejected"
+    };
+    return labels[status] || status;
   };
 
   return (
@@ -43,11 +54,11 @@ const CaseRequestTable = ({ requests, searchTerm, filterStatus }) => {
           </thead>
           <tbody>
             {filteredRequests.map((r) => (
-              <tr key={r.id}>
+              <tr key={r._id}>
                 <td>
                   <div className="client-info">
                     <span className="client-avatar">👤</span>
-                    <span>{r.userName}</span>
+                    <span>{r.client?.name || "Unknown Client"}</span>
                   </div>
                 </td>
                 <td>{r.caseType}</td>
@@ -56,12 +67,51 @@ const CaseRequestTable = ({ requests, searchTerm, filterStatus }) => {
                     className="status-badge"
                     style={{ backgroundColor: getStatusColor(r.status) }}
                   >
-                    {r.status}
+                    {getStatusLabel(r.status)}
                   </span>
                 </td>
-                <td>{r.date}</td>
+                <td>{new Date(r.createdAt).toLocaleDateString()}</td>
                 <td>
-                  <button className="btn-action" title="View Details">👁️</button>
+                  {r.status === "pending" ? (
+                    <div style={{ display: "flex", gap: "5px" }}>
+                      <button 
+                        className="btn-accept" 
+                        onClick={() => onAccept(r._id)}
+                        disabled={loading}
+                        style={{
+                          padding: "6px 12px",
+                          backgroundColor: "#4CAF50",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "4px",
+                          cursor: loading ? "not-allowed" : "pointer",
+                          opacity: loading ? 0.6 : 1,
+                          fontSize: "12px"
+                        }}
+                      >
+                        ✓ Accept
+                      </button>
+                      <button 
+                        className="btn-reject" 
+                        onClick={() => onReject(r._id)}
+                        disabled={loading}
+                        style={{
+                          padding: "6px 12px",
+                          backgroundColor: "#F44336",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "4px",
+                          cursor: loading ? "not-allowed" : "pointer",
+                          opacity: loading ? 0.6 : 1,
+                          fontSize: "12px"
+                        }}
+                      >
+                        ✕ Reject
+                      </button>
+                    </div>
+                  ) : (
+                    <button className="btn-action" title="View Details">👁️</button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -78,37 +128,100 @@ const CaseRequestTable = ({ requests, searchTerm, filterStatus }) => {
 };
 
 const LawyerCaseRequestsPage = () => {
-  // Example case requests
-  const caseRequests = [
-    { id: 1, userName: "Laiba Mubeen", caseType: "Family Law", status: "Pending", date: "10 Sep 2025" },
-    { id: 2, userName: "Ali Khan", caseType: "Criminal Case", status: "Accepted", date: "02 Sep 2025" },
-    { id: 3, userName: "Sara Ahmed", caseType: "Corporate Agreement", status: "Completed", date: "20 Aug 2025" },
-    { id: 4, userName: "Hassan Raza", caseType: "Property Dispute", status: "Pending", date: "15 Sep 2025" },
-    { id: 5, userName: "Fatima Khan", caseType: "Divorce Case", status: "Rejected", date: "05 Sep 2025" },
-    { id: 6, userName: "Ahmed Abdullah", caseType: "Contract Review", status: "Accepted", date: "12 Sep 2025" },
-  ];
-
+  const [cases, setCases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("All");
   const [sortBy, setSortBy] = useState("date");
 
-  const statusOptions = ["All", "Pending", "Accepted", "Completed", "Rejected"];
+  const statusOptions = ["All", "pending", "active", "completed", "rejected"];
+
+  // Fetch cases from backend
+  useEffect(() => {
+    const fetchCases = async () => {
+      try {
+        setLoading(true);
+        setError("");
+        const response = await API.get("/api/cases");
+        // Filter to show only pending cases to the lawyer
+        const filteredCases = response.data.filter(c => c.status === "pending" || c.lawyer === localStorage.getItem("lawyerId"));
+        setCases(filteredCases);
+      } catch (err) {
+        console.error("Error fetching cases:", err);
+        setError("Failed to load cases. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCases();
+  }, []);
+
+  // Handle Accept Case
+  const handleAcceptCase = async (caseId) => {
+    try {
+      setLoading(true);
+      console.log("Accepting case:", caseId);
+      const response = await API.put(`/api/cases/${caseId}`, { status: "active" });
+      console.log("Response:", response.data);
+      setCases(cases.map(c => c._id === caseId ? response.data : c));
+      setError("");
+      alert("✅ Case accepted successfully!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (err) {
+      console.error("Error updating case status:", err);
+      console.error("Error response:", err.response?.data);
+      const errorMsg = err.response?.data?.message || err.message || "Unknown error";
+      setError(`Error updating case status: ${errorMsg}`);
+      alert(`❌ Error accepting case: ${errorMsg}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle Reject Case
+  const handleRejectCase = async (caseId) => {
+    if (window.confirm("Are you sure you want to reject this case?")) {
+      try {
+        setLoading(true);
+        console.log("Rejecting case:", caseId);
+        const response = await API.put(`/api/cases/${caseId}`, { status: "rejected" });
+        console.log("Response:", response.data);
+        setCases(cases.map(c => c._id === caseId ? response.data : c));
+        setError("");
+        alert("✅ Case rejected successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } catch (err) {
+        console.error("Error rejecting case:", err);
+        console.error("Error response:", err.response?.data);
+        const errorMsg = err.response?.data?.message || err.message || "Unknown error";
+        setError(`Error rejecting case: ${errorMsg}`);
+        alert(`❌ Error rejecting case: ${errorMsg}`);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   const getSortedRequests = (requests) => {
     const sorted = [...requests];
     if (sortBy === "date") {
-      sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+      sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortBy === "name") {
-      sorted.sort((a, b) => a.userName.localeCompare(b.userName));
+      sorted.sort((a, b) => (a.client?.name || "").localeCompare(b.client?.name || ""));
     }
     return sorted;
   };
 
-  const sortedRequests = getSortedRequests(caseRequests);
+  const sortedRequests = getSortedRequests(cases);
   const filteredCount = sortedRequests.filter(
     (r) =>
       (searchTerm === "" ||
-        r.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (r.client?.name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
         r.caseType.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (filterStatus === "All" || r.status === filterStatus)
   ).length;
@@ -120,6 +233,8 @@ const LawyerCaseRequestsPage = () => {
         <div className="section-card">
           <h2>📋 Case Requests</h2>
           <p className="section-description">Review and manage all incoming case requests from clients.</p>
+
+          {error && <div style={{ color: "#f44336", marginBottom: "10px" }}>{error}</div>}
 
           {/* Search and Filter Section */}
           <div className="search-filter-section">
@@ -144,7 +259,7 @@ const LawyerCaseRequestsPage = () => {
                 >
                   {statusOptions.map((status) => (
                     <option key={status} value={status}>
-                      {status}
+                      {status === "All" ? "All" : status.charAt(0).toUpperCase() + status.slice(1)}
                     </option>
                   ))}
                 </select>
@@ -167,7 +282,7 @@ const LawyerCaseRequestsPage = () => {
 
           {/* Results Summary */}
           <div className="results-summary">
-            <span>📊 Showing <strong>{filteredCount}</strong> of <strong>{caseRequests.length}</strong> requests</span>
+            <span>📊 Showing <strong>{filteredCount}</strong> of <strong>{cases.length}</strong> requests</span>
           </div>
 
           {/* Case Request Table */}
@@ -175,6 +290,9 @@ const LawyerCaseRequestsPage = () => {
             requests={sortedRequests}
             searchTerm={searchTerm}
             filterStatus={filterStatus}
+            onAccept={handleAcceptCase}
+            onReject={handleRejectCase}
+            loading={loading}
           />
         </div>
       </div>

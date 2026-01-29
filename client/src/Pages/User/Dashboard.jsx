@@ -1,55 +1,70 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react"; // 1. useContext add kiya
 import DashboardCard from "../../Components/User/DashboardCard";
 import Notification from "../../Components/User/Notification";
 import Sidebar from "../../Components/User/Sidebar";
 import "../../Styles/User/Dashboard-Enhanced.css";
-
-// Sample data for appointments and cases
-const upcomingAppointments = [
-  { id: 1, title: "Court Hearing", date: "May 5, 2025", time: "10:00 AM", lawyer: "Adv. Ahmed Raza", location: "District Court, Karachi", priority: "high" },
-  { id: 2, title: "Client Meeting", date: "May 6, 2025", time: "2:00 PM", lawyer: "Adv. Hina Sheikh", location: "Law Office", priority: "medium" },
-  { id: 3, title: "Case Review", date: "May 8, 2025", time: "4:30 PM", lawyer: "Adv. Bilal Hussain", location: "Virtual Meeting", priority: "low" },
-];
-
-const recentCases = [
-  { id: 1, name: "Divorce Case", status: "ongoing", lastUpdate: "2 mins ago", caseNumber: "#2024-001", caseType: "Family Law", amount: "PKR 500,000" },
-  { id: 2, name: "Property Dispute", status: "pending", lastUpdate: "1 hr ago", caseNumber: "#2024-002", caseType: "Civil Law", amount: "PKR 1,200,000" },
-  { id: 3, name: "Contract Review", status: "closed", lastUpdate: "Yesterday", caseNumber: "#2024-003", caseType: "Corporate Law", amount: "PKR 300,000" },
-  { id: 4, name: "Inheritance Matter", status: "ongoing", lastUpdate: "3 hrs ago", caseNumber: "#2024-004", caseType: "Family Law", amount: "PKR 750,000" },
-  { id: 5, name: "Labour Dispute", status: "pending", lastUpdate: "2 days ago", caseNumber: "#2024-005", caseType: "Labour Law", amount: "PKR 450,000" },
-];
-
-const getStatusBadgeClass = (status) => {
-  return `status-badge status-${status}`;
-};
-
-// Statistics data
-const getStatistics = (cases) => {
-  const ongoing = cases.filter(c => c.status === "ongoing").length;
-  const pending = cases.filter(c => c.status === "pending").length;
-  const closed = cases.filter(c => c.status === "closed").length;
-  const total = cases.length;
-  
-  return { ongoing, pending, closed, total };
-};
+import { AuthContext } from "../../context/AuthContext"; // 2. Context Import kiya
+import API from "../../api";
 
 const Dashboard = () => {
+  // 3. Yahan se User ka Data nikala
+  const { user } = useContext(AuthContext);
+  const [cases, setCases] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+
+  // Fetch user's cases
+  useEffect(() => {
+    const fetchUserCases = async () => {
+      try {
+        setLoading(true);
+        const response = await API.get("/api/cases");
+        // Filter cases where user is the client
+        const userCases = response.data.filter(c => c.client === user?._id || c.client?.toString() === user?._id);
+        setCases(userCases);
+      } catch (error) {
+        console.error("Error fetching cases:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (user?._id) {
+      fetchUserCases();
+    }
+  }, [user?._id]);
+
+  const getStatistics = (caseList) => {
+    const active = caseList.filter(c => c.status === "active").length;
+    const pending = caseList.filter(c => c.status === "pending").length;
+    const completed = caseList.filter(c => c.status === "completed").length;
+    const rejected = caseList.filter(c => c.status === "rejected").length;
+    const total = caseList.length;
+    
+    return { active, pending, completed, rejected, total };
+  };
+
+  // Sample data for appointments (will integrate later)
+  const upcomingAppointments = [
+    { id: 1, title: "Court Hearing", date: "May 5, 2025", time: "10:00 AM", lawyer: "Adv. Ahmed Raza", location: "District Court, Karachi", priority: "high" },
+    { id: 2, title: "Client Meeting", date: "May 6, 2025", time: "2:00 PM", lawyer: "Adv. Hina Sheikh", location: "Law Office", priority: "medium" },
+    { id: 3, title: "Case Review", date: "May 8, 2025", time: "4:30 PM", lawyer: "Adv. Bilal Hussain", location: "Virtual Meeting", priority: "low" },
+  ];
   
-  const stats = useMemo(() => getStatistics(recentCases), []);
+  const stats = useMemo(() => getStatistics(cases), [cases]);
   
   const filteredCases = useMemo(() => {
-    return recentCases.filter(caseItem => {
-      const matchesSearch = caseItem.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           caseItem.caseNumber.toLowerCase().includes(searchTerm.toLowerCase());
+    return cases.filter(caseItem => {
+      const matchesSearch = caseItem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            caseItem.caseType.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesFilter = filterStatus === "all" || caseItem.status === filterStatus;
       return matchesSearch && matchesFilter;
     });
-  }, [searchTerm, filterStatus]);
+  }, [searchTerm, filterStatus, cases]);
 
-  const winRate = Math.round((stats.closed / stats.total) * 100) || 0;
+  const successRate = stats.completed > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
 
   return (
     <div className="dashboard-wrapper">
@@ -63,15 +78,20 @@ const Dashboard = () => {
         <div className="dashboard-header">
           <div className="header-top">
             <div className="header-content">
-              <h1>Welcome Back, Laiba! 👋</h1>
+              {/* 4. Yahan Naam Dynamic kar diya */}
+              <h1>Welcome Back, {user ? user.name : "User"} 👋</h1>
               <p>
                 Your legal dashboard - manage cases, appointments, and stay connected with your legal team.
               </p>
             </div>
             <div className="header-profile-widget">
-              <div className="profile-avatar">LM</div>
+              {/* Avatar bhi dynamic: Naam ka pehla letter */}
+              <div className="profile-avatar">
+                {user && user.name ? user.name.charAt(0).toUpperCase() : "U"}
+              </div>
               <div className="profile-info">
-                <p className="profile-name">Laiba Mubeen</p>
+                {/* Profile Name Dynamic */}
+                <p className="profile-name">{user ? user.name : "Guest User"}</p>
                 <p className="profile-role">Premium Member</p>
               </div>
             </div>
@@ -83,35 +103,34 @@ const Dashboard = () => {
               <div className="stat-icon ongoing">📁</div>
               <div className="stat-content">
                 <p className="stat-label">Active Cases</p>
-                <p className="stat-value">{stats.ongoing}</p>
+                <p className="stat-value">{loading ? "..." : stats.active}</p>
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-icon pending">⏳</div>
               <div className="stat-content">
                 <p className="stat-label">Pending</p>
-                <p className="stat-value">{stats.pending}</p>
+                <p className="stat-value">{loading ? "..." : stats.pending}</p>
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-icon closed">✅</div>
               <div className="stat-content">
                 <p className="stat-label">Completed</p>
-                <p className="stat-value">{stats.closed}</p>
+                <p className="stat-value">{loading ? "..." : stats.completed}</p>
               </div>
             </div>
             <div className="stat-card">
               <div className="stat-icon success">📈</div>
               <div className="stat-content">
                 <p className="stat-label">Success Rate</p>
-                <p className="stat-value">{winRate}%</p>
+                <p className="stat-value">{loading ? "..." : successRate}%</p>
               </div>
             </div>
           </div>
         </div>
-
         {/* Quick Access Cards */}
-        <div className="dashboard-cards">
+                <div className="dashboard-cards">
           <DashboardCard
             title="Search Lawyers"
             description="Find lawyers based on your legal case and location."
@@ -131,13 +150,12 @@ const Dashboard = () => {
             link="/user/requests"
           />
           <DashboardCard
-            title="Profile Settings"
-            description="Update your personal details and preferences."
-            icon="👤"
-            link="/user/profile"
-          />
-        </div>
-
+            title="Suggested Firms"
+            description="Get law firm recommendations based on your case type and location."
+            icon="🏢"
+            link="/user/suggested-firms"  // click pe SuggestedFirms page
+          />       
+   </div>                          
         {/* Two-Column Layout for Appointments and Cases */}
         <div className="dashboard-grid-2col">
           {/* Upcoming Appointments */}
@@ -186,7 +204,7 @@ const Dashboard = () => {
             <div className="cases-controls">
               <input
                 type="text"
-                placeholder="🔍 Search by case name or ID..."
+                placeholder="🔍 Search by case title or type..."
                 className="cases-search"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -197,39 +215,56 @@ const Dashboard = () => {
                 onChange={(e) => setFilterStatus(e.target.value)}
               >
                 <option value="all">All Status</option>
-                <option value="ongoing">Ongoing</option>
                 <option value="pending">Pending</option>
-                <option value="closed">Closed</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="rejected">Rejected</option>
               </select>
             </div>
 
             {/* Cases Table */}
             <div className="cases-table-wrapper">
-              {filteredCases.length > 0 ? (
+              {loading ? (
+                <p style={{ textAlign: "center", padding: "20px" }}>Loading your cases...</p>
+              ) : filteredCases.length > 0 ? (
                 <table className="cases-table">
                   <thead>
                     <tr>
-                      <th>Case ID</th>
-                      <th>Case Name</th>
-                      <th>Type</th>
+                      <th>Case Title</th>
+                      <th>Case Type</th>
                       <th>Status</th>
-                      <th>Amount</th>
-                      <th>Last Update</th>
+                      <th>Lawyer</th>
+                      <th>City</th>
+                      <th>Date</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredCases.map((caseItem) => (
-                      <tr key={caseItem.id} className="case-row">
-                        <td className="case-id">{caseItem.caseNumber}</td>
-                        <td className="case-name">{caseItem.name}</td>
+                      <tr key={caseItem._id} className="case-row">
+                        <td className="case-name">{caseItem.title}</td>
                         <td className="case-type">{caseItem.caseType}</td>
                         <td>
-                          <span className={getStatusBadgeClass(caseItem.status)}>
-                            {caseItem.status.charAt(0).toUpperCase() + caseItem.status.slice(1)}
+                          <span style={{
+                            padding: "4px 12px",
+                            borderRadius: "4px",
+                            fontSize: "12px",
+                            fontWeight: "600",
+                            backgroundColor: 
+                              caseItem.status === "pending" ? "#fff3cd" :
+                              caseItem.status === "active" ? "#d4edda" :
+                              caseItem.status === "completed" ? "#d1ecf1" : "#f8d7da",
+                            color:
+                              caseItem.status === "pending" ? "#856404" :
+                              caseItem.status === "active" ? "#155724" :
+                              caseItem.status === "completed" ? "#0c5460" : "#721c24",
+                            textTransform: "capitalize"
+                          }}>
+                            {caseItem.status}
                           </span>
                         </td>
-                        <td className="case-amount">{caseItem.amount}</td>
-                        <td className="case-update">{caseItem.lastUpdate}</td>
+                        <td className="case-lawyer">{caseItem.lawyer?.name || "Not Assigned"}</td>
+                        <td className="case-city">{caseItem.city}</td>
+                        <td className="case-date">{new Date(caseItem.createdAt).toLocaleDateString()}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -237,7 +272,7 @@ const Dashboard = () => {
               ) : (
                 <div className="no-data">
                   <p>🔎 No cases found</p>
-                  <small>Adjust your search or filter criteria</small>
+                  <small>Adjust your search or filter criteria or create a new case request</small>
                 </div>
               )}
             </div>
@@ -245,7 +280,7 @@ const Dashboard = () => {
             {/* Results Counter */}
             {filteredCases.length > 0 && (
               <div className="cases-footer">
-                Showing {filteredCases.length} of {recentCases.length} cases
+                Showing {filteredCases.length} of {cases.length} cases
               </div>
             )}
           </div>

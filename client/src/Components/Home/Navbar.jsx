@@ -1,11 +1,11 @@
 // src/components/Navbar.jsx
-import React, { useState } from "react";   // 🔹 useState ADD
+import React, { useState } from "react"; // useState for dropdown
 import { NavLink } from "react-router-dom";
-import "../../Styles/Home/Navbar.css";
+import "../../Styles/Home/Navbar.css"; // CSS file
 import logo from "../../assets/logo2.jpeg";
 
 const Navbar = () => {
-  // 🔹 state for dropdown
+  // 🔹 state for Join dropdown
   const [showJoinOptions, setShowJoinOptions] = useState(false);
 
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
             ALAH
           </h2>
           <p className="sub-title">
-            Advosacy, Defence & Legal Assistance Hub
+            Advocacy, Defence & Legal Assistance Hub
           </p>
         </div>
       </div>
@@ -28,31 +28,43 @@ const Navbar = () => {
       {/* Navigation Links */}
       <ul className="navbar-links">
         <li>
-          <NavLink to="/" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
             Home
           </NavLink>
         </li>
 
         <li>
-          <NavLink to="/user/find-lawyers" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink
+            to="/user/find-lawyers"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
             Find Lawyer
           </NavLink>
         </li>
 
         <li>
-          <NavLink to="/law-firms" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink
+            to="/law-firms"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
             Law Firms
           </NavLink>
         </li>
 
         <li>
-          <NavLink to="/chat" className={({ isActive }) => (isActive ? "active-link" : "")}>
+          <NavLink
+            to="/chatbot"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
             Chatbot
           </NavLink>
         </li>
       </ul>
 
-      {/* 🔽 JOIN BUTTON + DROPDOWN (ONLY CHANGE AREA) */}
+      {/* 🔽 Join Button + Dropdown */}
       <div className="navbar-auth">
         <button
           className="login-btn"
@@ -61,7 +73,7 @@ const Navbar = () => {
           Join
         </button>
 
-        <div className={`join-dropdown ${showJoinOptions ? 'show' : ''}`}>
+        <div className={`join-dropdown ${showJoinOptions ? "show" : ""}`}>
           <NavLink to="/join-user" className="join-option">
             Join as User
           </NavLink>
@@ -69,9 +81,15 @@ const Navbar = () => {
           <NavLink to="/join-lawyer" className="join-option">
             Join as Lawyer
           </NavLink>
+
           <NavLink to="/join-law-firm" className="join-option">
             Join as LawFirm
           </NavLink>
+
+ <NavLink to="/admin/join" className="join-option">
+  Join as Admin
+</NavLink>
+
         </div>
       </div>
     </nav>

@@ -1,0 +1,258 @@
+/* ============================================================
+   LAW FIRMS PAGE - Professional Navy & Gold Theme
+   ============================================================ */
+
+.law-firms-page {
+  padding: 20px;
+  background: linear-gradient(135deg, #0B1E39 0%, #1a3f5f 100%);
+  min-height: 100vh;
+  color: #E8ECF2;
+}
+
+/* PAGE HEADER */
+.page-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #f0c040;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: #b4bcc7;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* SEARCH & FILTER SECTION */
+.search-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: rgba(14, 37, 75, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.search-filters input,
+.search-filters select {
+  padding: 12px 16px;
+  border: 1px solid rgba(240, 192, 64, 0.3);
+  border-radius: 8px;
+  background: rgba(11, 30, 57, 0.8);
+  color: #E8ECF2;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.search-filters input::placeholder {
+  color: #7a869e;
+}
+
+.search-filters input:focus,
+.search-filters select:focus {
+  outline: none;
+  border-color: #f0c040;
+  background: rgba(11, 30, 57, 0.95);
+  box-shadow: 0 0 12px rgba(240, 192, 64, 0.3);
+}
+
+.search-filters select {
+  cursor: pointer;
+}
+
+.search-filters select option {
+  background: #0B1E39;
+  color: #E8ECF2;
+}
+
+/* LAW FIRMS RESULTS SECTION */
+.law-firms-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* FIRM CARD */
+.firm-card {
+  background: linear-gradient(135deg, rgba(14, 37, 75, 0.8) 0%, rgba(22, 42, 69, 0.8) 100%);
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(240, 192, 64, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.firm-card:hover {
+  transform: translateY(-4px);
+  border-color: #f0c040;
+  box-shadow: 0 12px 32px rgba(240, 192, 64, 0.2);
+}
+
+/* FIRM CARD TITLE */
+.firm-card h3 {
+  color: #f0c040;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* FIRM INFO */
+.firm-info {
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 16px;
+}
+
+.info-label {
+  display: block;
+  color: #b4bcc7;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  color: #E8ECF2;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* PRACTICE AREAS BADGES */
+.practice-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.practice-badge {
+  background: rgba(240, 192, 64, 0.15);
+  color: #f0c040;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(240, 192, 64, 0.3);
+  transition: all 0.3s ease;
+}
+
+.practice-badge:hover {
+  background: rgba(240, 192, 64, 0.25);
+  border-color: #f0c040;
+}
+
+/* BUTTONS */
+.contact-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: #f0c040;
+  color: #0B1E39;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+}
+
+.contact-btn:hover {
+  background: #f7d86f;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(240, 192, 64, 0.4);
+}
+
+.contact-btn:active {
+  transform: scale(0.98);
+}
+
+/* EMPTY STATE */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #7a869e;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .search-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .law-firms-results {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .firm-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .law-firms-page {
+    padding: 12px;
+  }
+
+  .search-filters {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .page-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+  }
+
+  .firm-card {
+    padding: 16px;
+  }
+
+  .firm-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .info-item {
+    margin-bottom: 12px;
+  }
+
+  .practice-badge {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .contact-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react"; 
 import { useNavigate } from "react-router-dom";
-//import "../../../Styles/User/JoinForm.css"; // same CSS reuse
+import API from "../../../api"; 
+import { AuthContext } from "../../../context/AuthContext"; 
+//import "../../../Styles/User/JoinForm.css"; 
 
 function LawyerSignup() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); 
 
   const [form, setForm] = useState({
     name: "",
@@ -20,6 +23,7 @@ function LawyerSignup() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -29,7 +33,8 @@ function LawyerSignup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  // --- UPDATED SUBMIT LOGIC ---
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -53,21 +58,50 @@ function LawyerSignup() {
     }
 
     setError("");
-    setSuccess("Signup successful! Redirecting to dashboard...");
+    setLoading(true);
 
-    console.log("Lawyer Signup Data:", form);
+    try {
+      // Data ko FormData mein convert kiya
+      const formData = new FormData();
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("phone", form.phone);
+      formData.append("password", form.password);
+      formData.append("cnic", form.cnic);
+      formData.append("experience", form.experience);
+      formData.append("specialization", form.specialization);
+      formData.append("city", form.city);
+      formData.append("role", "lawyer"); 
 
-    // Automatically log in the lawyer and redirect to dashboard
-    localStorage.setItem("authToken", "lawyer_token_" + Date.now());
-    localStorage.setItem("lawyerEmail", form.email);
-    localStorage.setItem("lawyerName", form.name);
-    localStorage.setItem("lawyerLoggedIn", "true");
-    localStorage.setItem("role", "lawyer");
-    localStorage.setItem("isLoggedIn", "true");
+      // File check karke append ki
+      if (form.licenseFile) {
+        formData.append("license", form.licenseFile);
+      }
 
-    setTimeout(() => {
-      navigate("/lawyer/dashboard");
-    }, 1200);
+      // API Call - FIXED: Removed manual headers
+      // Ab axios khud 'multipart/form-data' aur boundary detect karega
+      const response = await API.post("/api/users", formData);
+
+      console.log("Lawyer Signup Success:", response.data);
+      setSuccess("Account Created Successfully! Redirecting...");
+
+      // Auto Login - Save token separately too
+      login(response.data);
+      // Also save token directly to localStorage for redundancy
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+      }
+
+      setTimeout(() => {
+        navigate("/lawyer/dashboard");
+      }, 1500);
+
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || "Registration failed. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,7 +123,7 @@ function LawyerSignup() {
         {error && <div className="error"><span>⚠️</span> {error}</div>}
         {success && <div className="success"><span>✓</span> {success}</div>}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
           <input
             type="text"
             name="name"
@@ -176,8 +210,8 @@ function LawyerSignup() {
             />
           </label>
 
-          <button type="submit" className="submit-button">
-            Register as Lawyer
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? "Creating Account..." : "Register as Lawyer"}
           </button>
 
           <p className="form-footer">

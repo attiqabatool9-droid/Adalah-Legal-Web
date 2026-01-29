@@ -1,0 +1,61 @@
+/* Main chatbot container */
+.chatbot-window {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  width: 360px;
+  height: 500px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  animation: slideUp 0.3s ease-in-out;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Opening animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Messages area */
+.chatbot-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  background-color: #f7f8fa;
+}
+
+/* Scrollbar styling */
+.chatbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 10px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Disclaimer */
+.chatbot-disclaimer {
+  background-color: #fff3cd;
+  color: #856404;
+  font-size: 11px;
+  padding: 8px 10px;
+  text-align: center;
+  border-top: 1px solid #ffeeba;
+}

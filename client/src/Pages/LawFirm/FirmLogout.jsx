@@ -1,83 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../Styles/LawFirm/FirmLogout.css";
+import "../../Styles/User/Login.css"; 
 
-function FirmLogout() {
+const LawFirmLogin = () => {
   const navigate = useNavigate();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [firmName, setFirmName] = useState("");
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    // Get firm name from localStorage before clearing
-    const name = localStorage.getItem("lawfirmName") || "Law Firm";
-    setFirmName(name);
-  }, []);
+  // ✅ Saari purani redirection aur useEffect khatam!
+  // Ab ye page hamesha khulay ga aur aapki apni email accept karega.
 
-  const handleConfirmLogout = () => {
-    setIsLoggingOut(true);
-
-    // Clear all law firm related data from localStorage IMMEDIATELY
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("lawfirmEmail");
-    localStorage.removeItem("lawfirmName");
-    localStorage.removeItem("lawfirmLoggedIn");
-    localStorage.removeItem("role");
-    localStorage.removeItem("isLoggedIn");
-
-    // Simulate logout process with spinner for UX
-    setTimeout(() => {
-      // Navigate to login page after storage is cleared
-      navigate("/lawfirm/login");
-    }, 1500);
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleCancel = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!form.email || !form.password) {
+      setError("Please enter your email and password");
+      return;
+    }
+
+    // ✅ Testing ke liye: Har email/password par login ho jayega
+    localStorage.setItem("authToken", "lawfirm_token_" + Date.now());
+    localStorage.setItem("lawfirmEmail", form.email);
+    localStorage.setItem("lawfirmLoggedIn", "true");
+    localStorage.setItem("role", "lawfirm");
+    localStorage.setItem("isLoggedIn", "true");
+
+    alert("Login Successful with: " + form.email);
     navigate("/lawfirm/dashboard");
   };
 
   return (
-    <div className="logout-wrapper">
-      <div className="logout-container">
-        <div className="logout-card">
-          <div className="logout-icon">🚪</div>
+    <div className="login-container">
+      <h2>LawFirm Login</h2>
+      <p style={{textAlign: 'center', fontSize: '14px', color: '#666', marginBottom: '15px'}}>
+        Enter your credentials to access the dashboard
+      </p>
 
-          {!isLoggingOut ? (
-            <>
-              <h2>Confirm Logout</h2>
-              <p className="logout-message">
-                Are you sure you want to log out from <strong>{firmName}</strong>?
-              </p>
-              <p className="logout-info">
-                You will need to log in again to access your dashboard.
-              </p>
+      {error && <div className="error" style={{color: 'red', textAlign: 'center', marginBottom: '10px'}}>{error}</div>}
 
-              <div className="logout-actions">
-                <button
-                  className="logout-button confirm"
-                  onClick={handleConfirmLogout}
-                >
-                  Yes, Logout
-                </button>
-                <button className="logout-button cancel" onClick={handleCancel}>
-                  Cancel
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              <h2>Logging Out...</h2>
-              <div className="logout-spinner">
-                <div className="spinner"></div>
-              </div>
-              <p className="logout-message">
-                Please wait while we log you out securely.
-              </p>
-            </>
-          )}
-        </div>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email Address"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Your Password"
+          value={form.password}
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit" className="button">
+          Login as LawFirm
+        </button>
+      </form>
     </div>
   );
-}
+};
 
-export default FirmLogout;
+export default LawFirmLogin;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../../../api";
 import "../../../Styles/User/JoinForms.css";
 
 function UserJoinForm({ setRole }) {
@@ -19,6 +20,7 @@ function UserJoinForm({ setRole }) {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -28,7 +30,7 @@ function UserJoinForm({ setRole }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
@@ -51,14 +53,42 @@ function UserJoinForm({ setRole }) {
     }
 
     setError("");
-    setSuccess("Account created successfully! Redirecting...");
+    setLoading(true);
 
-    console.log("User Join Data:", form);
+    try {
+      // Call backend API to register user
+      const response = await API.post('/api/users', {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        password: form.password,
+        caseType: form.caseType,
+        caseDesc: form.caseDesc,
+        city: form.city,
+        urgent: form.urgent,
+        role: 'user'
+      });
 
-    setTimeout(() => {
-      // ✅ Dashboard open
-      navigate("/user/dashboard");
-    }, 1500);
+      console.log("User Registration Success:", response.data);
+      
+      setSuccess("Account created successfully! Redirecting...");
+      
+      // Store token and user info
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userRole', 'user');
+        localStorage.setItem('userName', response.data.name);
+      }
+
+      setTimeout(() => {
+        navigate("/user/dashboard");
+      }, 1500);
+    } catch (err) {
+      console.error("Registration error:", err);
+      const errorMessage = err.response?.data?.message || err.message || "Registration failed. Please try again.";
+      setError(errorMessage);
+      setLoading(false);
+    }
   };
 
   return (
@@ -158,7 +188,9 @@ function UserJoinForm({ setRole }) {
           Urgent case
         </label>
 
-        <button type="submit" className="submit-button">Create Account</button>
+        <button type="submit" className="submit-button" disabled={loading}>
+          {loading ? "Creating Account..." : "Create Account"}
+        </button>
         <p className="form-footer">
           Already have an account?{" "}
           <span

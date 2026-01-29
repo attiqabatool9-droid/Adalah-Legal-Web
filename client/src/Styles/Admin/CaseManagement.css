@@ -1,0 +1,218 @@
+/* ===============================
+   CASE MANAGEMENT STYLING
+   =============================== */
+
+/* Case ID Badge */
+.case-id-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(212, 168, 48, 0.15));
+  color: #f0c040;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+/* Case Title Cell */
+.case-title-cell {
+  max-width: 200px;
+}
+
+.case-title-cell strong {
+  color: #E8ECF2;
+}
+
+/* Case Type Badge */
+.case-type-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.15), rgba(236, 72, 153, 0.15));
+  color: #ec4899;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* Status Select */
+.status-select {
+  padding: 8px 12px;
+  border: 2px solid rgba(240, 192, 64, 0.2);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #0B1E39;
+  color: #E8ECF2;
+  font-weight: 600;
+}
+
+.status-select:hover {
+  border-color: #f0c040;
+  background: rgba(240, 192, 64, 0.05);
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #f0c040;
+  box-shadow: 0 0 0 3px rgba(240, 192, 64, 0.1);
+}
+
+/* Priority Badges */
+.priority-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.priority-badge.critical {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+  color: #ef4444;
+}
+
+.priority-badge.high {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(249, 115, 22, 0.15));
+  color: #f97316;
+}
+
+.priority-badge.medium {
+  background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(212, 168, 48, 0.15));
+  color: #f0c040;
+}
+
+.priority-badge.low {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(22, 163, 74, 0.15));
+  color: #22c55e;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.open {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.status-badge.pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.status-badge.in\ progress {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+}
+
+.status-badge.resolved {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+/* Filter Select */
+.filter-select {
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-select:hover {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Case Modal Specific */
+.case-modal {
+  max-width: 700px;
+}
+
+.case-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: #0f172a;
+  margin: 0;
+  font-weight: 600;
+}
+
+.detail-value .status-badge,
+.detail-value .priority-badge {
+  margin-top: 4px;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+
+@media (max-width: 1024px) {
+  .case-title-cell {
+    max-width: 150px;
+  }
+
+  .case-id-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .case-type-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .case-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .priority-badge,
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .case-modal {
+    max-width: 95vw;
+  }
+}

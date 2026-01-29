@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react"; // 1. useContext add kiya
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext"; // 2. Context Import kiya
 
 const Logout = () => {
   const navigate = useNavigate();
+  
+  // 3. Context se logout function nikala
+  const { logout } = useContext(AuthContext);
+
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
 
@@ -10,17 +15,11 @@ const Logout = () => {
     setConfirmed(true);
     setIsLoggingOut(true);
 
-    // Clear all authentication data from localStorage
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userRole");
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLoggedIn");
-    localStorage.clear();
-
-    // Clear sessionStorage as well
+    // 4. Manual clearing ki jagah Context wala logout function use kiya
+    // Ye function LocalStorage bhi clear karega aur App ka State bhi reset karega
+    logout(); 
+    
+    // Session storage bhi clear kar dete hain (safety ke liye)
     sessionStorage.clear();
 
     // Show logout message for 2 seconds, then redirect to login

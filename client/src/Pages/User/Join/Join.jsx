@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import UserJoinForm from "./UserJoinForm";
 import LawyerJoinForm from "./LawyerJoinForm";
 import LawFirmJoin from "./LawFirmJoin";
+//import AdminJoinForm from "./AdminJoinForm"; // 🔹 Admin form import
 
 function Join() {
   console.log("JOIN PAGE RENDERED");
@@ -87,6 +88,7 @@ function Join() {
             style={{
               width: "200px",
               padding: "16px 32px",
+              marginBottom: "20px",
               background: "linear-gradient(135deg, #2ecc71, #27ae60)",
               color: "#ffffff",
               border: "2px solid #f5c451",
@@ -100,6 +102,27 @@ function Join() {
           >
             🏢 Join as Law Firm
           </button>
+
+          {/* 🔹 Admin Button */}
+          <button
+            type="button"
+            onClick={() => setRole("admin")}
+            style={{
+              width: "200px",
+              padding: "16px 32px",
+              background: "linear-gradient(135deg, #e74c3c, #c0392b)",
+              color: "#ffffff",
+              border: "2px solid #f5c451",
+              borderRadius: "8px",
+              fontSize: "16px",
+              fontWeight: "600",
+              cursor: "pointer",
+              display: "block",
+              margin: "20px auto 0",
+            }}
+          >
+            🛡️ Join as Admin
+          </button>
         </div>
       )}
 
@@ -107,6 +130,7 @@ function Join() {
       {role === "user" && <UserJoinForm setRole={setRole} />}
       {role === "lawyer" && <LawyerJoinForm setRole={setRole} />}
       {role === "lawfirm" && <LawFirmJoin setRole={setRole} />}
+      {role === "admin" && <AdminJoinForm setRole={setRole} />} {/* 🔹 Admin form */}
     </div>
   );
 }
